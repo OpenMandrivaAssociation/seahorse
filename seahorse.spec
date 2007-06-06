@@ -1,5 +1,5 @@
 %define name seahorse
-%define version 1.0.1
+%define version 2.19.2
 %define release %mkrel 1
 %define major 0
 %define libname %mklibname %name %major
@@ -201,7 +201,6 @@ rm -rf $RPM_BUILD_ROOT
 %dir %{_datadir}/omf/seahorse/
 %_datadir/pixmaps/*
 %{_datadir}/omf/seahorse/seahorse-C.omf
-%{_datadir}/control-center-2.0/capplets/seahorse-pgp-preferences.desktop
 %dir %{_datadir}/seahorse/
 %dir %{_datadir}/seahorse/glade/
 %{_datadir}/seahorse/glade/*
