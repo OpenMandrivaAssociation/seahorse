@@ -1,6 +1,6 @@
 %define name seahorse
-%define version 2.19.2
-%define release %mkrel 2
+%define version 2.19.4
+%define release %mkrel 1
 %define major 0
 %define libname %mklibname %name %major
 
@@ -15,7 +15,6 @@ Group:		Graphical desktop/GNOME
 URL:		http://seahorse.sourceforge.net/
 Source:		http://ftp.gnome.org/pub/GNOME/sources/seahorse/%{name}-%{version}.tar.bz2
 Patch: seahorse-0.9.0-makefile.patch
-Patch1: seahorse-2.19.2-epi2.19.patch
 Requires:	gnupg
 BuildRoot:	%{_tmppath}/%{name}-%{version}
 BuildRequires:  gpgme-devel >= 1.0.0
@@ -88,9 +87,8 @@ This package integrates Seahorse with the Epiphany web browser.
 %setup -q
 
 %patch -p1 -b .makefile
-%patch1 -p1 -b .epi2.19
-aclocal-1.9 -I m4
-automake-1.9 -a -c
+aclocal -I m4
+automake -a -c
 autoconf
 
 %build
