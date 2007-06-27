@@ -28,6 +28,7 @@ BuildRequires: libnotify-devel
 BuildRequires: libldap-devel
 BuildRequires: libsoup-devel
 BuildRequires: gnome-panel-devel
+BuildRequires: libgnomeprintui-devel
 BuildRequires: gnome-doc-utils
 BuildRequires: intltool
 BuildRequires: automake1.9
