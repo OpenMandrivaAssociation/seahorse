@@ -22,6 +22,7 @@ BuildRequires:  openssh-clients
 BuildRequires:  gedit-devel
 BuildRequires:  epiphany-devel >= %epiphany mozilla-firefox-devel
 BuildRequires: libnautilus-devel
+BuildRequires: libGConf2-devel
 BuildRequires: scrollkeeper
 BuildRequires: libnotify-devel
 BuildRequires: libldap-devel
