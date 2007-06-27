@@ -1,6 +1,6 @@
 %define name seahorse
 %define version 2.19.4
-%define release %mkrel 1
+%define release %mkrel 2
 %define major 0
 %define libname %mklibname %name %major
 
@@ -14,7 +14,7 @@ License:	GPL
 Group:		Graphical desktop/GNOME
 URL:		http://seahorse.sourceforge.net/
 Source:		http://ftp.gnome.org/pub/GNOME/sources/seahorse/%{name}-%{version}.tar.bz2
-Patch: seahorse-0.9.0-makefile.patch
+Patch:		seahorse-0.9.0-makefile.patch
 Requires:	gnupg
 BuildRoot:	%{_tmppath}/%{name}-%{version}
 BuildRequires:  gpgme-devel >= 1.0.0
@@ -92,7 +92,7 @@ automake -a -c
 autoconf
 
 %build
-export CPPFLAGS=-DLIBCRYPTUI_API_SUBJECT_TO_CHANGE
+export CPPFLAGS="$CPPFLAGS -DLIBCRYPTUI_API_SUBJECT_TO_CHANGE"
 %configure2_5x --enable-fast-install
 
 make
