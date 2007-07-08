@@ -1,6 +1,6 @@
 %define name seahorse
-%define version 2.19.4
-%define release %mkrel 2
+%define version 2.19.5
+%define release %mkrel 1
 %define major 0
 %define libname %mklibname %name %major
 
@@ -100,7 +100,7 @@ export CPPFLAGS="$CPPFLAGS -DLIBCRYPTUI_API_SUBJECT_TO_CHANGE"
 make
 
 %install
-rm -rf $RPM_BUILD_ROOT
+rm -rf $RPM_BUILD_ROOT %name.lang
 
 GCONF_DISABLE_MAKEFILE_SCHEMA_INSTALL=1 %makeinstall_std _ENABLE_SK=false
 rm -f %buildroot%_libdir/libseahorse*{a,so}
@@ -135,8 +135,8 @@ convert -scale 16 pixmaps/48x48/%name.png %buildroot%_miconsdir/%name.png
 %{find_lang} seahorse --with-gnome
 %{find_lang} seahorse-applet --with-gnome
 cat seahorse-applet.lang >> seahorse.lang
-for omf in %buildroot%_datadir/omf/%name/%name-??*.omf;do 
-echo "%lang($(basename $omf|sed -e s/%name-// -e s/.omf//)) $(echo $omf|sed -e s!%buildroot!!)" >> %name.lang
+for omf in %buildroot%_datadir/omf/*/*-??*.omf;do 
+echo "%lang($(basename $omf|sed -e s/.*-// -e s/.omf//)) $(echo $omf|sed -e s!%buildroot!!)" >> %name.lang
 done
 
 
