@@ -1,8 +1,9 @@
 %define name seahorse
-%define version 2.19.5
+%define version 2.19.90
 %define release %mkrel 1
 %define major 0
 %define libname %mklibname %name %major
+%define libnamedev %mklibname -d %name
 
 %define epiphany 2.19
 
@@ -58,13 +59,14 @@ for verifying those signatures. Key management options are also included. Both
 English and Japanese is support is provided. 
 NOTE: NO CRYPTO STUFF IN THIS PACKAGE
 
-%package -n %libname-devel
+%package -n %libnamedev
 Group: Development/C
 Summary: Seahorse libraries
 Requires: %libname = %version
 Provides: lib%name-devel = %version-%release
+Obsoletes: %mklibname -d %name 0
 
-%description -n %libname-devel
+%description -n %libnamedev
 Seahorse is a GNOME2 frontend for the GNU Privacy Guard ecryption tool. It can 
 be used for file encryption and decryption and for digitally signing files and 
 for verifying those signatures. Key management options are also included. Both 
@@ -172,7 +174,7 @@ rm -rf $RPM_BUILD_ROOT
 %defattr(-,root,root,0755)
 %_libdir/*.so.%{major}*
 
-%files -n %libname-devel
+%files -n %libnamedev
 %defattr(-,root,root,0755)
 %_libdir/*.so
 %_libdir/*.a
