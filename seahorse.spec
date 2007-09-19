@@ -1,11 +1,11 @@
 %define name seahorse
 %define version 2.20.0
-%define release %mkrel 1
+%define release %mkrel 2
 %define major 0
 %define libname %mklibname %name %major
 %define libnamedev %mklibname -d %name
 
-%define epiphany 2.19
+%define epiphany 2.20
 
 Name:		%{name}
 Summary:	Seahorse is a GNOME2 frontend to GnuPG
