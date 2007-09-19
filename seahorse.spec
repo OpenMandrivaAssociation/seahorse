@@ -1,5 +1,5 @@
 %define name seahorse
-%define version 2.20
+%define version 2.20.0
 %define release %mkrel 1
 %define major 0
 %define libname %mklibname %name %major
