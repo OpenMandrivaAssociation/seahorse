@@ -44,8 +44,8 @@ Requires(postun):scrollkeeper,shared-mime-info,desktop-file-utils
 %description
 Seahorse is a GNOME2 frontend for the GNU Privacy Guard ecryption tool. It can 
 be used for file encryption and decryption and for digitally signing files and 
-for verifying those signatures. Key management options are also included. Both 
-English and Japanese is support is provided. 
+for verifying those signatures. Key management options are also included.
+
 NOTE: NO CRYPTO STUFF IN THIS PACKAGE
 
 %package -n %libname
@@ -55,8 +55,8 @@ Summary: Seahorse libraries
 %description -n %libname
 Seahorse is a GNOME2 frontend for the GNU Privacy Guard ecryption tool. It can 
 be used for file encryption and decryption and for digitally signing files and 
-for verifying those signatures. Key management options are also included. Both 
-English and Japanese is support is provided. 
+for verifying those signatures. Key management options are also included.
+ 
 NOTE: NO CRYPTO STUFF IN THIS PACKAGE
 
 %package -n %libnamedev
@@ -69,8 +69,8 @@ Obsoletes: %mklibname -d %name 0
 %description -n %libnamedev
 Seahorse is a GNOME2 frontend for the GNU Privacy Guard ecryption tool. It can 
 be used for file encryption and decryption and for digitally signing files and 
-for verifying those signatures. Key management options are also included. Both 
-English and Japanese is support is provided. 
+for verifying those signatures. Key management options are also included.
+ 
 NOTE: NO CRYPTO STUFF IN THIS PACKAGE
 
 %package epiphany
