@@ -17,7 +17,6 @@ URL:		http://seahorse.sourceforge.net/
 Source:		http://ftp.gnome.org/pub/GNOME/sources/seahorse/%{name}-%{version}.tar.bz2
 Patch:		seahorse-0.9.0-makefile.patch
 Requires:	gnupg
-BuildRoot:	%{_tmppath}/%{name}-%{version}
 BuildRequires:  gpgme-devel >= 1.0.0
 BuildRequires:  openssh-clients
 BuildRequires:  gedit-devel
