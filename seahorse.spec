@@ -1,5 +1,5 @@
 %define name seahorse
-%define version 2.21.3
+%define version 2.21.4
 %define release %mkrel 1
 %define major 0
 %define libname %mklibname %name %major
@@ -219,6 +219,8 @@ rm -rf $RPM_BUILD_ROOT
 %_iconsdir/%name.png
 %_miconsdir/%name.png
 
+%if 0
 %files epiphany
 %defattr(-,root,root,0755)
 %_libdir/epiphany/%epiphany/extensions/*
+%endif
