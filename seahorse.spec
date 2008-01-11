@@ -102,15 +102,6 @@ GCONF_DISABLE_MAKEFILE_SCHEMA_INSTALL=1 %makeinstall_std _ENABLE_SK=false
 rm -f %buildroot%_libdir/libseahorse*{a,so}
 
 # Menu
-mkdir -p %buildroot/%_menudir
-cat > %buildroot/%_menudir/%name  <<EOF
-?package(%name): command="%_bindir/seahorse" needs="X11" \
-icon="seahorse.png" section="System/File Tools" \
-title="GPG Keys Manager" longtitle="Manage your GPG keys" xdg="true"
-?package(%name): command="%_bindir/seahorse-preferences" needs="gnome" \
-icon="seahorse.png" section="Configuration/GNOME/Advanced" \
-title="PGP Preferences" longtitle="Configure PGP" xdg="true"
-EOF
 desktop-file-install --vendor="" \
   --remove-category="Advanced" \
   --remove-category="Application" \
@@ -209,7 +200,6 @@ rm -rf $RPM_BUILD_ROOT
 %_datadir/icons/hicolor/*/apps/*
 %dir %_datadir/omf/seahorse-applet/
 %_datadir/omf/seahorse-applet/*-C.omf
-%{_menudir}/*
 %_liconsdir/%name.png
 %_iconsdir/%name.png
 %_miconsdir/%name.png
