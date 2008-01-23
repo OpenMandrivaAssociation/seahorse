@@ -1,6 +1,6 @@
 %define name seahorse
 %define version 2.21.4
-%define release %mkrel 1
+%define release %mkrel 2
 %define major 0
 %define libname %mklibname %name %major
 %define libnamedev %mklibname -d %name
@@ -11,7 +11,7 @@ Name:		%{name}
 Summary:	Seahorse is a GNOME2 frontend to GnuPG
 Version:	%{version}
 Release:	%{release}
-License:	GPL
+License:	GPLv2+
 Group:		Graphical desktop/GNOME
 URL:		http://seahorse.sourceforge.net/
 Source:		http://ftp.gnome.org/pub/GNOME/sources/seahorse/%{name}-%{version}.tar.bz2
@@ -32,7 +32,7 @@ BuildRequires: gnome-panel-devel
 BuildRequires: libgnomeprintui-devel
 BuildRequires: gnome-doc-utils
 BuildRequires: intltool
-BuildRequires: automake1.9
+BuildRequires: automake
 BuildRequires: ImageMagick
 BuildRequires: libxslt-proc
 BuildRequires: desktop-file-utils
