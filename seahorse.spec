@@ -16,6 +16,7 @@ Group:		Graphical desktop/GNOME
 URL:		http://seahorse.sourceforge.net/
 Source:		http://ftp.gnome.org/pub/GNOME/sources/seahorse/%{name}-%{version}.tar.bz2
 Patch:		seahorse-0.9.0-makefile.patch
+Patch1: seahorse-2.21.4-nautilus.patch
 Requires:	gnupg
 BuildRoot:	%{_tmppath}/%{name}-%{version}
 BuildRequires:  gpgme-devel >= 1.0.0
@@ -85,6 +86,7 @@ This package integrates Seahorse with the Epiphany web browser.
 %setup -q
 
 %patch -p1 -b .makefile
+%patch1 -p1
 aclocal -I m4
 automake -a -c
 autoconf
@@ -126,9 +128,11 @@ for omf in %buildroot%_datadir/omf/*/*-??*.omf;do
 echo "%lang($(basename $omf|sed -e s/.*-// -e s/.omf//)) $(echo $omf|sed -e s!%buildroot!!)" >> %name.lang
 done
 
+cd %buildroot%_libdir/nautilus/
+mv extensions-1.0 extensions-2.0
 
 #remove unpackaged files
-rm -f $RPM_BUILD_ROOT%{_libdir}/{epiphany/*/extensions/,nautilus/extensions-1.0,gedit-2/plugins}/*.{la,a}
+rm -f $RPM_BUILD_ROOT%{_libdir}/{epiphany/*/extensions/,nautilus/extensions-2.0,gedit-2/plugins}/*.{la,a}
  
 %post
 %{update_menus}
@@ -180,7 +184,7 @@ rm -rf $RPM_BUILD_ROOT
 %_mandir/man1/*
 %{_libdir}/%name/
 %{_libdir}/gedit-2/plugins/*
-%_libdir/nautilus/extensions-1.0/libnautilus-seahorse.so
+%_libdir/nautilus/extensions-2.0/libnautilus-seahorse.so
 %_datadir/mime/packages/%name.xml
 %{_datadir}/applications/seahorse.desktop
 %{_datadir}/applications/seahorse-pgp-encrypted.desktop
