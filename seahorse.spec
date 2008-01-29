@@ -1,11 +1,12 @@
 %define name seahorse
-%define version 2.21.4
-%define release %mkrel 2
+%define version 2.21.90
+%define release %mkrel 1
 %define major 0
 %define libname %mklibname %name %major
 %define libnamedev %mklibname -d %name
 
-%define epiphany 2.20
+%define epiphany 2.21
+%define build_epiphany 0
 
 Name:		%{name}
 Summary:	Seahorse is a GNOME2 frontend to GnuPG
@@ -17,12 +18,12 @@ URL:		http://seahorse.sourceforge.net/
 Source:		http://ftp.gnome.org/pub/GNOME/sources/seahorse/%{name}-%{version}.tar.bz2
 Patch:		seahorse-0.9.0-makefile.patch
 Patch1: seahorse-2.21.4-nautilus.patch
+Patch2: seahorse-2.21.90-epiphany.patch
 Requires:	gnupg
 BuildRoot:	%{_tmppath}/%{name}-%{version}
 BuildRequires:  gpgme-devel >= 1.0.0
 BuildRequires:  openssh-clients
 BuildRequires:  gedit-devel
-BuildRequires:  epiphany-devel >= %epiphany mozilla-firefox-devel
 BuildRequires: libnautilus-devel
 BuildRequires: libGConf2-devel
 BuildRequires: scrollkeeper
@@ -67,12 +68,15 @@ Obsoletes: %mklibname -d %name 0
 Seahorse is a GNOME2 frontend for the GNU Privacy Guard ecryption tool. It can 
 be used for file encryption and decryption and for digitally signing files and 
 for verifying those signatures. Key management options are also included.
- 
+
+%if %build_epiphany 
 %package epiphany
 Group: Networking/WWW
 Summary: Seahorse GnuPG plugin for Epiphany 
 Requires: %name = %version
 Requires: epiphany >= %epiphany
+BuildRequires:  epiphany-devel >= %epiphany mozilla-firefox-devel
+
 
 %description epiphany
 Seahorse is a GNOME2 frontend for the GNU Privacy Guard ecryption tool. It can 
@@ -80,6 +84,7 @@ be used for file encryption and decryption and for digitally signing files and
 for verifying those signatures.
 
 This package integrates Seahorse with the Epiphany web browser.
+%endif
 
 %prep
 
@@ -87,13 +92,17 @@ This package integrates Seahorse with the Epiphany web browser.
 
 %patch -p1 -b .makefile
 %patch1 -p1
+%patch2 -p1
 aclocal -I m4
 automake -a -c
 autoconf
 
 %build
 export CPPFLAGS="$CPPFLAGS -DLIBCRYPTUI_API_SUBJECT_TO_CHANGE"
-%configure2_5x --enable-fast-install
+%configure2_5x --enable-fast-install \
+%if ! %build_epiphany
+--disable-epiphany
+%endif
 
 make
 
@@ -127,9 +136,6 @@ cat seahorse-applet.lang >> seahorse.lang
 for omf in %buildroot%_datadir/omf/*/*-??*.omf;do 
 echo "%lang($(basename $omf|sed -e s/.*-// -e s/.omf//)) $(echo $omf|sed -e s!%buildroot!!)" >> %name.lang
 done
-
-cd %buildroot%_libdir/nautilus/
-mv extensions-1.0 extensions-2.0
 
 #remove unpackaged files
 rm -f $RPM_BUILD_ROOT%{_libdir}/{epiphany/*/extensions/,nautilus/extensions-2.0,gedit-2/plugins}/*.{la,a}
@@ -208,7 +214,7 @@ rm -rf $RPM_BUILD_ROOT
 %_iconsdir/%name.png
 %_miconsdir/%name.png
 
-%if 0
+%if %build_epiphany
 %files epiphany
 %defattr(-,root,root,0755)
 %_libdir/epiphany/%epiphany/extensions/*
