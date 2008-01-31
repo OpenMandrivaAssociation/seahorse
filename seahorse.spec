@@ -1,12 +1,12 @@
 %define name seahorse
-%define version 2.21.90
+%define version 2.21.91
 %define release %mkrel 1
 %define major 0
 %define libname %mklibname %name %major
 %define libnamedev %mklibname -d %name
 
 %define epiphany 2.21
-%define build_epiphany 0
+%define build_epiphany 1
 
 Name:		%{name}
 Summary:	Seahorse is a GNOME2 frontend to GnuPG
@@ -18,7 +18,6 @@ URL:		http://seahorse.sourceforge.net/
 Source:		http://ftp.gnome.org/pub/GNOME/sources/seahorse/%{name}-%{version}.tar.bz2
 Patch:		seahorse-0.9.0-makefile.patch
 Patch1: seahorse-2.21.4-nautilus.patch
-Patch2: seahorse-2.21.90-epiphany.patch
 Requires:	gnupg
 BuildRoot:	%{_tmppath}/%{name}-%{version}
 BuildRequires:  gpgme-devel >= 1.0.0
@@ -92,7 +91,6 @@ This package integrates Seahorse with the Epiphany web browser.
 
 %patch -p1 -b .makefile
 %patch1 -p1
-%patch2 -p1
 aclocal -I m4
 automake -a -c
 autoconf
