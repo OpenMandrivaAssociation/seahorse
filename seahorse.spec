@@ -9,7 +9,7 @@
 %define build_epiphany 1
 
 Name:		%{name}
-Summary:	Seahorse is a GNOME2 frontend to GnuPG
+Summary:	GNOME2 frontend to GnuPG
 Version:	%{version}
 Release:	%{release}
 License:	GPLv2+
