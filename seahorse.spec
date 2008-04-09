@@ -1,6 +1,6 @@
 %define name seahorse
-%define version 2.22.0
-%define release %mkrel 2
+%define version 2.22.1
+%define release %mkrel 1
 %define major 0
 %define libname %mklibname %name %major
 %define libnamedev %mklibname -d %name
@@ -12,7 +12,9 @@ Name:		%{name}
 Summary:	GNOME2 frontend to GnuPG
 Version:	%{version}
 Release:	%{release}
-License:	GPLv2+
+# seahorse is GPLv2+
+# libcryptui is LGPLv2+
+License:	GPLv2+ and LGPLv2+
 Group:		Graphical desktop/GNOME
 URL:		http://seahorse.sourceforge.net/
 Source:		http://ftp.gnome.org/pub/GNOME/sources/seahorse/%{name}-%{version}.tar.bz2
