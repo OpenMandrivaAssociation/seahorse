@@ -159,8 +159,12 @@ rm -f $RPM_BUILD_ROOT%{_libdir}/{epiphany/*/extensions/,nautilus/extensions-2.0,
 %clean_icon_cache hicolor
 %clean_scrollkeeper
 
+%if %mdkversion < 200900
 %post -n %libname -p /sbin/ldconfig
+%endif
+%if %mdkversion < 200900
 %postun -n %libname -p /sbin/ldconfig
+%endif
 
 %clean
 rm -rf $RPM_BUILD_ROOT
