@@ -141,23 +141,29 @@ done
 rm -f $RPM_BUILD_ROOT%{_libdir}/{epiphany/*/extensions/,nautilus/extensions-2.0,gedit-2/plugins}/*.{la,a}
  
 %post
+%if %mdkversion < 200900
 %{update_menus}
+%endif
 %define schemas seahorse-gedit seahorse
+%if %mdkversion < 200900
 %post_install_gconf_schemas %schemas
 %update_mime_database
 %update_desktop_database
 %update_icon_cache hicolor
 %update_scrollkeeper
+%endif
 
 %preun
 %preun_uninstall_gconf_schemas %schemas
 
+%if %mdkversion < 200900
 %postun
 %{clean_menus} 
 %clean_mime_database
 %clean_desktop_database
 %clean_icon_cache hicolor
 %clean_scrollkeeper
+%endif
 
 %if %mdkversion < 200900
 %post -n %libname -p /sbin/ldconfig
