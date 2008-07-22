@@ -1,12 +1,9 @@
 %define name seahorse
-%define version 2.22.3
+%define version 2.23.5
 %define release %mkrel 1
 %define major 0
 %define libname %mklibname %name %major
 %define libnamedev %mklibname -d %name
-
-%define epiphany 2.22
-%define build_epiphany 1
 
 Name:		%{name}
 Summary:	GNOME2 frontend to GnuPG
@@ -18,20 +15,16 @@ License:	GPLv2+ and LGPLv2+
 Group:		Graphical desktop/GNOME
 URL:		http://seahorse.sourceforge.net/
 Source:		http://ftp.gnome.org/pub/GNOME/sources/seahorse/%{name}-%{version}.tar.bz2
-Patch:		seahorse-0.9.0-makefile.patch
-Patch1: seahorse-2.21.4-nautilus.patch
 Requires:	gnupg
 BuildRoot:	%{_tmppath}/%{name}-%{version}
 BuildRequires:  gpgme-devel >= 1.0.0
 BuildRequires:  openssh-clients
-BuildRequires:  gedit-devel
-BuildRequires: libnautilus-devel
 BuildRequires: libGConf2-devel
 BuildRequires: scrollkeeper
 BuildRequires: libnotify-devel
 BuildRequires: libldap-devel
 BuildRequires: libsoup-devel
-BuildRequires: gnome-panel-devel
+BuildRequires: gnome-keyring-devel >= 2.23.5
 BuildRequires: libgnomeprintui-devel
 BuildRequires: gnome-doc-utils
 BuildRequires: intltool
@@ -41,8 +34,8 @@ BuildRequires: libxslt-proc
 BuildRequires: desktop-file-utils
 Obsoletes:	seahorse2
 Provides:	seahorse2
-Requires(post): scrollkeeper,shared-mime-info,desktop-file-utils
-Requires(postun):scrollkeeper,shared-mime-info,desktop-file-utils
+Requires(post): scrollkeeper,desktop-file-utils
+Requires(postun):scrollkeeper,desktop-file-utils
 
 %description
 Seahorse is a GNOME2 frontend for the GNU Privacy Guard ecryption tool. It can 
@@ -70,40 +63,14 @@ Seahorse is a GNOME2 frontend for the GNU Privacy Guard ecryption tool. It can
 be used for file encryption and decryption and for digitally signing files and 
 for verifying those signatures. Key management options are also included.
 
-%if %build_epiphany 
-%package epiphany
-Group: Networking/WWW
-Summary: Seahorse GnuPG plugin for Epiphany 
-Requires: %name = %version
-Requires: epiphany >= %epiphany
-BuildRequires:  epiphany-devel >= %epiphany mozilla-firefox-devel
-
-
-%description epiphany
-Seahorse is a GNOME2 frontend for the GNU Privacy Guard ecryption tool. It can 
-be used for file encryption and decryption and for digitally signing files and 
-for verifying those signatures.
-
-This package integrates Seahorse with the Epiphany web browser.
-%endif
 
 %prep
 
 %setup -q
 
-%patch -p1 -b .makefile
-%patch1 -p1
-aclocal -I m4
-automake -a -c
-autoconf
-
 %build
 export CPPFLAGS="$CPPFLAGS -DLIBCRYPTUI_API_SUBJECT_TO_CHANGE"
-%configure2_5x --enable-fast-install \
-%if ! %build_epiphany
---disable-epiphany
-%endif
-
+%configure2_5x --enable-fast-install
 make
 
 %install
@@ -118,12 +85,6 @@ desktop-file-install --vendor="" \
   --remove-category="Application" \
   --add-category="X-MandrivaLinux-System-FileTools" \
   --dir $RPM_BUILD_ROOT%{_datadir}/applications $RPM_BUILD_ROOT%{_datadir}/applications/seahorse.desktop
-desktop-file-install --vendor="" \
-  --remove-category="Advanced" \
-  --remove-category="Application" \
-  --add-category="X-MandrivaLinux-System-Configuration-Other" \
-  --dir $RPM_BUILD_ROOT%{_datadir}/applications $RPM_BUILD_ROOT%{_datadir}/applications/seahorse-pgp-preferences.desktop
-
 
 mkdir -p %buildroot{%_liconsdir,%_miconsdir,%_iconsdir}
 ln -s %_datadir/pixmaps/%name.png %buildroot%_liconsdir/
@@ -137,17 +98,14 @@ for omf in %buildroot%_datadir/omf/*/*-??*.omf;do
 echo "%lang($(basename $omf|sed -e s/.*-// -e s/.omf//)) $(echo $omf|sed -e s!%buildroot!!)" >> %name.lang
 done
 
-#remove unpackaged files
-rm -f $RPM_BUILD_ROOT%{_libdir}/{epiphany/*/extensions/,nautilus/extensions-2.0,gedit-2/plugins}/*.{la,a}
  
 %post
 %if %mdkversion < 200900
 %{update_menus}
 %endif
-%define schemas seahorse-gedit seahorse
+%define schemas seahorse
 %if %mdkversion < 200900
 %post_install_gconf_schemas %schemas
-%update_mime_database
 %update_desktop_database
 %update_icon_cache hicolor
 %update_scrollkeeper
@@ -159,7 +117,6 @@ rm -f $RPM_BUILD_ROOT%{_libdir}/{epiphany/*/extensions/,nautilus/extensions-2.0,
 %if %mdkversion < 200900
 %postun
 %{clean_menus} 
-%clean_mime_database
 %clean_desktop_database
 %clean_icon_cache hicolor
 %clean_scrollkeeper
@@ -191,41 +148,20 @@ rm -rf $RPM_BUILD_ROOT
 %defattr(-,root,root,0755)
 %doc AUTHORS COPYING ChangeLog INSTALL NEWS README
 %{_sysconfdir}/gconf/schemas/seahorse.schemas
-%{_sysconfdir}/gconf/schemas/seahorse-gedit.schemas
 %{_bindir}/seahorse
-%{_bindir}/seahorse-agent
-%{_bindir}/seahorse-preferences
-%{_bindir}/seahorse-tool
 %attr(4755,root,root) %{_bindir}/seahorse-daemon
 %_mandir/man1/*
 %{_libdir}/%name/
-%{_libdir}/gedit-2/plugins/*
-%_libdir/nautilus/extensions-2.0/libnautilus-seahorse.so
-%_datadir/mime/packages/%name.xml
 %{_datadir}/applications/seahorse.desktop
-%{_datadir}/applications/seahorse-pgp-encrypted.desktop
-%{_datadir}/applications/seahorse-pgp-keys.desktop
-%{_datadir}/applications/seahorse-pgp-signature.desktop
-%{_datadir}/applications/seahorse-pgp-preferences.desktop
-%dir %{_datadir}/omf/seahorse/
 %_datadir/pixmaps/*
-%{_datadir}/omf/seahorse/seahorse-C.omf
+%dir %{_datadir}/omf/seahorse/
 %dir %{_datadir}/seahorse/
 %dir %{_datadir}/seahorse/glade/
+%{_datadir}/omf/seahorse/seahorse-C.omf
 %{_datadir}/seahorse/glade/*
 %_datadir/dbus-1/services/*
-#%_libexecdir/seahorse-applet
-%_libdir/bonobo/servers/*
-%_datadir/gnome-2.0/ui/*.xml
 %_datadir/icons/hicolor/*/apps/*
-%dir %_datadir/omf/seahorse-applet/
-%_datadir/omf/seahorse-applet/*-C.omf
 %_liconsdir/%name.png
 %_iconsdir/%name.png
 %_miconsdir/%name.png
 
-%if %build_epiphany
-%files epiphany
-%defattr(-,root,root,0755)
-%_libdir/epiphany/%epiphany/extensions/*
-%endif
