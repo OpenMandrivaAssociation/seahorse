@@ -19,6 +19,7 @@ Requires:	gnupg
 BuildRoot:	%{_tmppath}/%{name}-%{version}
 BuildRequires:  gpgme-devel >= 1.0.0
 BuildRequires:  openssh-clients
+BuildRequires: avahi-client-devel avahi-glib-devel
 BuildRequires: libGConf2-devel
 BuildRequires: libglade2.0-devel
 BuildRequires: scrollkeeper
