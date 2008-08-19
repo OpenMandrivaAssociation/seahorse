@@ -1,5 +1,5 @@
 %define name seahorse
-%define version 2.23.6
+%define version 2.23.90
 %define release %mkrel 1
 %define major 0
 %define libname %mklibname %name %major
@@ -88,11 +88,6 @@ desktop-file-install --vendor="" \
   --add-category="X-MandrivaLinux-System-FileTools" \
   --dir $RPM_BUILD_ROOT%{_datadir}/applications $RPM_BUILD_ROOT%{_datadir}/applications/seahorse.desktop
 
-mkdir -p %buildroot{%_liconsdir,%_miconsdir,%_iconsdir}
-ln -s %_datadir/pixmaps/%name.png %buildroot%_liconsdir/
-convert -scale 32 pixmaps/48x48/%name.png %buildroot%_iconsdir/%name.png
-convert -scale 16 pixmaps/48x48/%name.png %buildroot%_miconsdir/%name.png
-
 %{find_lang} seahorse --with-gnome
 %{find_lang} seahorse-applet --with-gnome
 cat seahorse-applet.lang >> seahorse.lang
@@ -163,7 +158,3 @@ rm -rf $RPM_BUILD_ROOT
 %{_datadir}/seahorse/glade/*
 %_datadir/dbus-1/services/*
 %_datadir/icons/hicolor/*/apps/*
-%_liconsdir/%name.png
-%_iconsdir/%name.png
-%_miconsdir/%name.png
-
