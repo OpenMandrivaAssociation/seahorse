@@ -31,7 +31,7 @@ BuildRequires: libgnomeprintui-devel
 BuildRequires: gnome-doc-utils
 BuildRequires: intltool
 BuildRequires: automake
-BuildRequires: ImageMagick
+BuildRequires: imagemagick
 BuildRequires: libxslt-proc
 BuildRequires: desktop-file-utils
 Obsoletes:	seahorse2
