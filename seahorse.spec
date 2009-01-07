@@ -1,6 +1,6 @@
 %define name seahorse
-%define version 2.25.1
-%define release %mkrel 2
+%define version 2.25.4
+%define release %mkrel 1
 %define major 0
 %define libname %mklibname %name %major
 %define libnamedev %mklibname -d %name
@@ -26,7 +26,7 @@ BuildRequires: scrollkeeper
 BuildRequires: libnotify-devel
 BuildRequires: libldap-devel
 BuildRequires: libsoup-devel
-BuildRequires: gnome-keyring-devel >= 2.23.5
+BuildRequires: gnome-keyring-devel >= 2.25.4
 BuildRequires: libgnomeprintui-devel
 BuildRequires: gnome-doc-utils
 BuildRequires: intltool
@@ -150,6 +150,8 @@ rm -rf $RPM_BUILD_ROOT
 %_mandir/man1/*
 %{_libdir}/%name/
 %{_datadir}/applications/seahorse.desktop
+%_datadir/cryptui
+%_datadir/gnome/autostart/seahorse-daemon.desktop
 %_datadir/pixmaps/*
 %dir %{_datadir}/omf/seahorse/
 %dir %{_datadir}/seahorse/
