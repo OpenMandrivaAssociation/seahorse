@@ -1,5 +1,5 @@
 %define name seahorse
-%define version 2.25.4
+%define version 2.25.90
 %define release %mkrel 1
 %define major 0
 %define libname %mklibname %name %major
@@ -145,13 +145,12 @@ rm -rf $RPM_BUILD_ROOT
 %defattr(-,root,root,0755)
 %doc AUTHORS COPYING ChangeLog INSTALL NEWS README
 %{_sysconfdir}/gconf/schemas/seahorse.schemas
+%_sysconfdir/xdg/autostart/seahorse-daemon.desktop
 %{_bindir}/seahorse
 %attr(4755,root,root) %{_bindir}/seahorse-daemon
 %_mandir/man1/*
 %{_libdir}/%name/
 %{_datadir}/applications/seahorse.desktop
-%_datadir/cryptui
-%_datadir/gnome/autostart/seahorse-daemon.desktop
 %_datadir/pixmaps/*
 %dir %{_datadir}/omf/seahorse/
 %dir %{_datadir}/seahorse/
@@ -160,3 +159,4 @@ rm -rf $RPM_BUILD_ROOT
 %{_datadir}/seahorse/glade/*
 %_datadir/dbus-1/services/*
 %_datadir/icons/hicolor/*/apps/*
+%_datadir/gtk-doc/html/libcryptui/
