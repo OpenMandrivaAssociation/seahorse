@@ -1,5 +1,5 @@
 %define name seahorse
-%define version 2.27.1
+%define version 2.27.5
 %define release %mkrel 1
 %define major 0
 %define libname %mklibname %name %major
@@ -21,7 +21,6 @@ BuildRequires:  gpgme-devel >= 1.0.0
 BuildRequires:  openssh-clients
 BuildRequires: avahi-client-devel avahi-glib-devel
 BuildRequires: libGConf2-devel
-BuildRequires: libglade2.0-devel
 BuildRequires: scrollkeeper
 BuildRequires: libnotify-devel
 BuildRequires: libldap-devel
@@ -71,7 +70,7 @@ for verifying those signatures. Key management options are also included.
 %setup -q
 
 %build
-export CPPFLAGS="$CPPFLAGS -DLIBCRYPTUI_API_SUBJECT_TO_CHANGE"
+export CPPFLAGS="$CPPFLAGS -DLIBCRYPTUI_API_SUBJECT_TO_CHANGE -D_FILE_OFFSET_BITS=64 -DLARGEFILE_SOURCE=1"
 %configure2_5x --enable-fast-install
 make
 
@@ -154,9 +153,8 @@ rm -rf $RPM_BUILD_ROOT
 %_datadir/pixmaps/*
 %dir %{_datadir}/omf/seahorse/
 %dir %{_datadir}/seahorse/
-%dir %{_datadir}/seahorse/glade/
+%{_datadir}/seahorse/ui
 %{_datadir}/omf/seahorse/seahorse-C.omf
-%{_datadir}/seahorse/glade/*
 %_datadir/dbus-1/services/*
 %_datadir/icons/hicolor/*/apps/*
 %_datadir/gtk-doc/html/libcryptui/
