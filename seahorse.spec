@@ -1,6 +1,6 @@
 %define name seahorse
 %define version 2.27.90
-%define release %mkrel 1
+%define release %mkrel 2
 %define major 0
 %define libname %mklibname %name %major
 %define libnamedev %mklibname -d %name
@@ -146,7 +146,7 @@ rm -rf $RPM_BUILD_ROOT
 %{_sysconfdir}/gconf/schemas/seahorse.schemas
 %_sysconfdir/xdg/autostart/seahorse-daemon.desktop
 %{_bindir}/seahorse
-%attr(4755,root,root) %{_bindir}/seahorse-daemon
+%{_bindir}/seahorse-daemon
 %_mandir/man1/*
 %{_libdir}/%name/
 %{_datadir}/applications/seahorse.desktop
