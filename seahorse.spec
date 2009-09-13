@@ -1,6 +1,6 @@
 %define name seahorse
-%define version 2.27.90
-%define release %mkrel 2
+%define version 2.27.92
+%define release %mkrel 1
 %define major 0
 %define libname %mklibname %name %major
 %define libnamedev %mklibname -d %name
@@ -15,6 +15,7 @@ License:	GPLv2+ and LGPLv2+
 Group:		Graphical desktop/GNOME
 URL:		http://seahorse.sourceforge.net/
 Source:		http://ftp.gnome.org/pub/GNOME/sources/seahorse/%{name}-%{version}.tar.bz2
+Patch: seahorse-2.27.92-fix-linking.patch
 Requires:	gnupg
 BuildRoot:	%{_tmppath}/%{name}-%{version}
 BuildRequires:  gpgme-devel >= 1.0.0
@@ -68,6 +69,8 @@ for verifying those signatures. Key management options are also included.
 %prep
 
 %setup -q
+%patch -p1
+autoreconf
 
 %build
 export CPPFLAGS="$CPPFLAGS -DLIBCRYPTUI_API_SUBJECT_TO_CHANGE -D_FILE_OFFSET_BITS=64 -DLARGEFILE_SOURCE=1"
@@ -158,3 +161,4 @@ rm -rf $RPM_BUILD_ROOT
 %_datadir/dbus-1/services/*
 %_datadir/icons/hicolor/*/apps/*
 %_datadir/gtk-doc/html/libcryptui/
+%_datadir/gtk-doc/html/libseahorse/
