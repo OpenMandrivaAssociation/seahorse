@@ -1,5 +1,5 @@
 %define name seahorse
-%define version 2.28.0
+%define version 2.28.1
 %define release %mkrel 1
 %define major 0
 %define libname %mklibname %name %major
@@ -27,7 +27,6 @@ BuildRequires: libnotify-devel
 BuildRequires: libldap-devel
 BuildRequires: libsoup-devel
 BuildRequires: gnome-keyring-devel >= 2.25.4
-BuildRequires: libgnomeprintui-devel
 BuildRequires: gnome-doc-utils
 BuildRequires: intltool
 BuildRequires: automake
@@ -36,8 +35,8 @@ BuildRequires: libxslt-proc
 BuildRequires: desktop-file-utils
 Obsoletes:	seahorse2
 Provides:	seahorse2
-Requires(post): scrollkeeper,desktop-file-utils
-Requires(postun):scrollkeeper,desktop-file-utils
+Requires(post): rarian desktop-file-utils
+Requires(postun): rarian desktop-file-utils
 
 %description
 Seahorse is a GNOME2 frontend for the GNU Privacy Guard ecryption tool. It can 
