@@ -1,5 +1,5 @@
 %define name seahorse
-%define version 2.29.3
+%define version 2.29.4
 %define release %mkrel 1
 %define major 0
 %define libname %mklibname %name %major
@@ -26,7 +26,9 @@ BuildRequires: scrollkeeper
 BuildRequires: libnotify-devel
 BuildRequires: libldap-devel
 BuildRequires: libsoup-devel
-BuildRequires: gnome-keyring-devel >= 2.25.4
+BuildRequires: libgnome-keyring-devel >= 2.25.4
+BuildRequires: libgcr-devel
+BuildRequires: gobject-introspection-devel
 BuildRequires: gnome-doc-utils
 BuildRequires: intltool
 BuildRequires: automake
@@ -133,6 +135,7 @@ rm -rf $RPM_BUILD_ROOT
 %files -n %libname
 %defattr(-,root,root,0755)
 %_libdir/*.so.%{major}*
+%_libdir/girepository-1.0/CryptUI-0.0.typelib
 
 %files -n %libnamedev
 %defattr(-,root,root,0755)
@@ -141,6 +144,7 @@ rm -rf $RPM_BUILD_ROOT
 %attr(644,root,root) %_libdir/*.la
 %_includedir/*
 %_libdir/pkgconfig/*.pc
+%_datadir/gir-1.0/CryptUI-0.0.gir
 
 %files -f %{name}.lang
 %defattr(-,root,root,0755)
