@@ -1,6 +1,6 @@
 %define name seahorse
 %define version 2.29.4
-%define release %mkrel 1
+%define release %mkrel 2
 %define major 0
 %define libname %mklibname %name %major
 %define libnamedev %mklibname -d %name
@@ -37,6 +37,8 @@ BuildRequires: libxslt-proc
 BuildRequires: desktop-file-utils
 Obsoletes:	seahorse2
 Provides:	seahorse2
+Obsoletes:	gnome-keyring-manager
+Provides:	gnome-keyring-manager
 Requires(post): rarian desktop-file-utils
 Requires(postun): rarian desktop-file-utils
 
