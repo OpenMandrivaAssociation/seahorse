@@ -15,7 +15,9 @@ License:	GPLv2+ and LGPLv2+
 Group:		Graphical desktop/GNOME
 URL:		http://seahorse.sourceforge.net/
 Source:		http://ftp.gnome.org/pub/GNOME/sources/seahorse/%{name}-%{version}.tar.bz2
-Patch: seahorse-2.27.92-fix-linking.patch
+Patch0: seahorse-2.27.92-fix-linking.patch
+#from upstream git
+Patch1: seahorse-2.29.4-fix-bad-g_strconcat.patch
 Requires:	gnupg
 BuildRoot:	%{_tmppath}/%{name}-%{version}
 BuildRequires:  gpgme-devel >= 1.0.0
@@ -72,7 +74,8 @@ for verifying those signatures. Key management options are also included.
 %prep
 
 %setup -q
-%patch -p1
+%patch0 -p1
+%patch1 -p1
 autoreconf
 
 %build
