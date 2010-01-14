@@ -79,7 +79,6 @@ for verifying those signatures. Key management options are also included.
 autoreconf
 
 %build
-export CPPFLAGS="$CPPFLAGS -DLIBCRYPTUI_API_SUBJECT_TO_CHANGE -D_FILE_OFFSET_BITS=64 -DLARGEFILE_SOURCE=1"
 %configure2_5x --enable-fast-install
 make
 
