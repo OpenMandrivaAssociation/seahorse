@@ -1,6 +1,6 @@
 %define name seahorse
-%define version 2.29.4
-%define release %mkrel 3
+%define version 2.29.90
+%define release %mkrel 1
 %define major 0
 %define libname %mklibname %name %major
 %define libnamedev %mklibname -d %name
@@ -16,8 +16,6 @@ Group:		Graphical desktop/GNOME
 URL:		http://seahorse.sourceforge.net/
 Source:		http://ftp.gnome.org/pub/GNOME/sources/seahorse/%{name}-%{version}.tar.bz2
 Patch0: seahorse-2.27.92-fix-linking.patch
-#from upstream git
-Patch1: seahorse-2.29.4-fix-bad-g_strconcat.patch
 Requires:	gnupg
 BuildRoot:	%{_tmppath}/%{name}-%{version}
 BuildRequires:  gpgme-devel >= 1.0.0
@@ -75,7 +73,6 @@ for verifying those signatures. Key management options are also included.
 
 %setup -q
 %patch0 -p1
-%patch1 -p1
 autoreconf
 
 %build
@@ -154,7 +151,6 @@ rm -rf $RPM_BUILD_ROOT
 %defattr(-,root,root,0755)
 %doc AUTHORS COPYING ChangeLog INSTALL NEWS README
 %{_sysconfdir}/gconf/schemas/seahorse.schemas
-%_sysconfdir/xdg/autostart/seahorse-daemon.desktop
 %{_bindir}/seahorse
 %{_bindir}/seahorse-daemon
 %_mandir/man1/*
