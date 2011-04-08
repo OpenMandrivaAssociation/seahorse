@@ -29,6 +29,7 @@ BuildRequires: libgnome-keyring-devel >= 3.0.0
 BuildRequires: libgcr-devel >= 3.0.0
 BuildRequires: gobject-introspection-devel
 BuildRequires: gtk+2-devel
+BuildRequires: libsm-devel
 BuildRequires: gnome-doc-utils
 BuildRequires: intltool
 BuildRequires: automake
