@@ -1,9 +1,9 @@
 %define name seahorse
-%define version 2.91.91
+%define version 3.0.0
 %define release %mkrel 1
 %define major 0
-%define libname %mklibname %name %major
-%define libnamedev %mklibname -d %name
+%define libname %mklibname cryptui %major
+%define libnamedev %mklibname -d cryptui
 
 Name:		%{name}
 Summary:	GNOME2 frontend to GnuPG
@@ -15,32 +15,26 @@ License:	GPLv2+ and LGPLv2+
 Group:		Graphical desktop/GNOME
 URL:		http://seahorse.sourceforge.net/
 Source:		http://ftp.gnome.org/pub/GNOME/sources/seahorse/%{name}-%{version}.tar.bz2
-Patch0: seahorse-2.27.92-fix-linking.patch
 Requires:	gnupg
 BuildRoot:	%{_tmppath}/%{name}-%{version}
 BuildRequires:  gpgme-devel >= 1.0.0
 BuildRequires:  openssh-clients
 BuildRequires: avahi-client-devel avahi-glib-devel
-BuildRequires: libGConf2-devel
+BuildRequires: libGConf2-devel GConf2
 BuildRequires: scrollkeeper
 BuildRequires: libnotify-devel
 BuildRequires: libldap-devel
 BuildRequires: libsoup-devel
-BuildRequires: libgnome-keyring-devel >= 2.25.4
-BuildRequires: libgcr-devel
+BuildRequires: libgnome-keyring-devel >= 3.0.0
+BuildRequires: libgcr-devel >= 3.0.0
 BuildRequires: gobject-introspection-devel
+BuildRequires: gtk+2-devel
 BuildRequires: gnome-doc-utils
 BuildRequires: intltool
 BuildRequires: automake
-BuildRequires: imagemagick
 BuildRequires: libxslt-proc
-BuildRequires: desktop-file-utils
-Obsoletes:	seahorse2
-Provides:	seahorse2
-Obsoletes:	gnome-keyring-manager
-Provides:	gnome-keyring-manager
-Requires(post): rarian desktop-file-utils
-Requires(postun): rarian desktop-file-utils
+%rename seahorse2
+%rename gnome-keyring-manager
 
 %description
 Seahorse is a GNOME2 frontend for the GNU Privacy Guard ecryption tool. It can 
@@ -50,6 +44,7 @@ for verifying those signatures. Key management options are also included.
 %package -n %libname
 Group: System/Libraries
 Summary: Seahorse libraries
+Obsoletes: %{_lib}seahorse0 < 3.0.0
 
 %description -n %libname
 Seahorse is a GNOME2 frontend for the GNU Privacy Guard ecryption tool. It can 
@@ -60,8 +55,9 @@ for verifying those signatures. Key management options are also included.
 Group: Development/C
 Summary: Seahorse libraries
 Requires: %libname = %version
-Provides: lib%name-devel = %version-%release
+Provides: %name-devel = %version-%release
 Obsoletes: %mklibname -d %name 0
+Obsoletes: %{_lib}seahorse-devel < 3.0.0
 
 %description -n %libnamedev
 Seahorse is a GNOME2 frontend for the GNU Privacy Guard ecryption tool. It can 
@@ -70,68 +66,26 @@ for verifying those signatures. Key management options are also included.
 
 
 %prep
-
 %setup -q
-%patch0 -p1
-autoreconf
 
 %build
-%configure2_5x --enable-fast-install
-make
+%configure2_5x --disable-update-mime-database --disable-static --disable-schemas-install
+%make
 
 %install
 rm -rf $RPM_BUILD_ROOT %name.lang
+%makeinstall_std
 
-GCONF_DISABLE_MAKEFILE_SCHEMA_INSTALL=1 %makeinstall_std _ENABLE_SK=false
-rm -f %buildroot%_libdir/libseahorse*{a,so}
-
-# Menu
-desktop-file-install --vendor="" \
-  --remove-category="Advanced" \
-  --remove-category="Application" \
-  --add-category="X-MandrivaLinux-System-FileTools" \
-  --dir $RPM_BUILD_ROOT%{_datadir}/applications $RPM_BUILD_ROOT%{_datadir}/applications/seahorse.desktop
-
-%{find_lang} seahorse --with-gnome
-%{find_lang} seahorse-applet --with-gnome
-cat seahorse-applet.lang >> seahorse.lang
+%{find_lang} seahorse --with-gnome --all-name
 for omf in %buildroot%_datadir/omf/*/*-??*.omf;do 
 echo "%lang($(basename $omf|sed -e s/.*-// -e s/.omf//)) $(echo $omf|sed -e s!%buildroot!!)" >> %name.lang
 done
-
  
-%post
-%if %mdkversion < 200900
-%{update_menus}
-%endif
-%define schemas seahorse
-%if %mdkversion < 200900
-%post_install_gconf_schemas %schemas
-%update_desktop_database
-%update_icon_cache hicolor
-%update_scrollkeeper
-%endif
-
-%preun
-%preun_uninstall_gconf_schemas %schemas
-
-%if %mdkversion < 200900
-%postun
-%{clean_menus} 
-%clean_desktop_database
-%clean_icon_cache hicolor
-%clean_scrollkeeper
-%endif
-
-%if %mdkversion < 200900
-%post -n %libname -p /sbin/ldconfig
-%endif
-%if %mdkversion < 200900
-%postun -n %libname -p /sbin/ldconfig
-%endif
-
 %clean
 rm -rf $RPM_BUILD_ROOT
+
+%preun
+%preun_uninstall_gconf_schemas %name
 
 %files -n %libname
 %defattr(-,root,root,0755)
@@ -141,8 +95,7 @@ rm -rf $RPM_BUILD_ROOT
 %files -n %libnamedev
 %defattr(-,root,root,0755)
 %_libdir/*.so
-%_libdir/*.a
-%attr(644,root,root) %_libdir/*.la
+%_libdir/*.la
 %_includedir/*
 %_libdir/pkgconfig/*.pc
 %_datadir/gir-1.0/CryptUI-0.0.gir
