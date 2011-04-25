@@ -70,7 +70,7 @@ for verifying those signatures. Key management options are also included.
 %setup -q
 
 %build
-%configure2_5x --disable-update-mime-database --disable-static --disable-schemas-install
+%configure2_5x --disable-update-mime-database --disable-static --disable-schemas-install --with-gtk=2
 %make
 
 %install
