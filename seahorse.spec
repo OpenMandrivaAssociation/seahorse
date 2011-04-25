@@ -1,5 +1,5 @@
 %define name seahorse
-%define version 3.0.0
+%define version 3.0.1
 %define release %mkrel 1
 %define major 0
 %define libname %mklibname cryptui %major
