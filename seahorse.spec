@@ -1,121 +1,77 @@
-%define name seahorse
-%define version 3.0.2
-%define release %mkrel 1
-%define major 0
-%define libname %mklibname cryptui %major
-%define libnamedev %mklibname -d cryptui
+%define url_ver	%(echo %{version}|cut -d. -f1,2)
 
-Name:		%{name}
-Summary:	GNOME2 frontend to GnuPG
-Version:	%{version}
-Release:	%{release}
-# seahorse is GPLv2+
-# libcryptui is LGPLv2+
-License:	GPLv2+ and LGPLv2+
+Name:		seahorse
+Summary:	GNOME frontend to GnuPG
+Version:	3.4.1
+Release:	1
+License:	GPLv2+
 Group:		Graphical desktop/GNOME
 URL:		http://seahorse.sourceforge.net/
-Source:		http://ftp.gnome.org/pub/GNOME/sources/seahorse/%{name}-%{version}.tar.bz2
+Source0:	http://download.gnome.org/sources/%{name}/%{url_ver}/%{name}-%{version}.tar.xz
 Requires:	gnupg
-BuildRoot:	%{_tmppath}/%{name}-%{version}
-BuildRequires:  gpgme-devel >= 1.0.0
-BuildRequires:  openssh-clients
-BuildRequires: avahi-client-devel avahi-glib-devel
-BuildRequires: libGConf2-devel GConf2
-BuildRequires: scrollkeeper
-BuildRequires: libnotify-devel
-BuildRequires: libldap-devel
-BuildRequires: libsoup-devel
-BuildRequires: libgnome-keyring-devel >= 3.0.0
-BuildRequires: libgcr-devel >= 3.0.0
-BuildRequires: gobject-introspection-devel
-BuildRequires: gtk+2-devel
-BuildRequires: libsm-devel
-BuildRequires: gnome-doc-utils
-BuildRequires: intltool
-BuildRequires: automake
-BuildRequires: libxslt-proc
-%rename seahorse2
-%rename gnome-keyring-manager
+BuildRequires:	pkgconfig(avahi-client)
+BuildRequires:	pkgconfig(avahi-glib) >= 0.6
+BuildRequires:	pkgconfig(gck-1) >= 3.1.2
+BuildRequires:	pkgconfig(gcr-3) >= 3.1.5
+BuildRequires:	pkgconfig(gio-2.0)
+BuildRequires:	pkgconfig(gmodule-2.0)
+BuildRequires:	pkgconfig(gnome-keyring-1) >= 2.25.5
+BuildRequires:	pkgconfig(gthread-2.0)
+BuildRequires:	pkgconfig(gtk+-3.0) >= 2.90.0
+BuildRequires:	pkgconfig(libsoup-2.4)
+BuildRequires:	gnupg
+BuildRequires:	gpgme-devel >= 1.0.0
+BuildRequires:	libldap-devel
+BuildRequires:	gnome-doc-utils
+BuildRequires:	intltool
+BuildRequires:	automake
+BuildRequires:	imagemagick
+BuildRequires:	libxslt-proc
+BuildRequires:	desktop-file-utils
+Obsoletes:	gnome-keyring-manager
+Provides:	gnome-keyring-manager
 
 %description
-Seahorse is a GNOME2 frontend for the GNU Privacy Guard ecryption tool. It can 
+Seahorse is a GNOME frontend for the GNU Privacy Guard ecryption tool. It can 
 be used for file encryption and decryption and for digitally signing files and 
 for verifying those signatures. Key management options are also included.
-
-%package -n %libname
-Group: System/Libraries
-Summary: Seahorse libraries
-Obsoletes: %{_lib}seahorse0 < 3.0.0
-
-%description -n %libname
-Seahorse is a GNOME2 frontend for the GNU Privacy Guard ecryption tool. It can 
-be used for file encryption and decryption and for digitally signing files and 
-for verifying those signatures. Key management options are also included.
- 
-%package -n %libnamedev
-Group: Development/C
-Summary: Seahorse libraries
-Requires: %libname = %version
-Provides: %name-devel = %version-%release
-Obsoletes: %mklibname -d %name 0
-Obsoletes: %{_lib}seahorse-devel < 3.0.0
-
-%description -n %libnamedev
-Seahorse is a GNOME2 frontend for the GNU Privacy Guard ecryption tool. It can 
-be used for file encryption and decryption and for digitally signing files and 
-for verifying those signatures. Key management options are also included.
-
 
 %prep
 %setup -q
+%apply_patches
 
 %build
-%configure2_5x --disable-update-mime-database --disable-static --disable-schemas-install --with-gtk=2
+%configure2_5x \
+	--disable-static
 %make
 
 %install
-rm -rf $RPM_BUILD_ROOT %name.lang
 %makeinstall_std
 
-%{find_lang} seahorse --with-gnome --all-name
-for omf in %buildroot%_datadir/omf/*/*-??*.omf;do 
-echo "%lang($(basename $omf|sed -e s/.*-// -e s/.omf//)) $(echo $omf|sed -e s!%buildroot!!)" >> %name.lang
+# Menu
+desktop-file-install --vendor="" \
+	--remove-category="Advanced" \
+	--remove-category="Application" \
+	--dir %{buildroot}%{_datadir}/applications \
+	%{buildroot}%{_datadir}/applications/%{name}.desktop
+
+%{find_lang} %{name} --all-name --with-gnome
+for omf in %{buildroot}%{_datadir}/omf/*/*-??*.omf;do 
+echo "%lang($(basename $omf|sed -e s/.*-// -e s/.omf//)) $(echo $omf|sed -e s!%{buildroot}!!)" >> %{name}.lang
 done
  
-%clean
-rm -rf $RPM_BUILD_ROOT
-
-%preun
-%preun_uninstall_gconf_schemas %name
-
-%files -n %libname
-%defattr(-,root,root,0755)
-%_libdir/*.so.%{major}*
-%_libdir/girepository-1.0/CryptUI-0.0.typelib
-
-%files -n %libnamedev
-%defattr(-,root,root,0755)
-%_libdir/*.so
-%_libdir/*.la
-%_includedir/*
-%_libdir/pkgconfig/*.pc
-%_datadir/gir-1.0/CryptUI-0.0.gir
-
 %files -f %{name}.lang
-%defattr(-,root,root,0755)
-%doc AUTHORS COPYING ChangeLog INSTALL NEWS README
-%{_sysconfdir}/gconf/schemas/seahorse.schemas
+%doc AUTHORS ChangeLog NEWS README
 %{_bindir}/seahorse
-%{_bindir}/seahorse-daemon
-%_mandir/man1/*
-%{_libdir}/%name/
+%{_mandir}/man1/*
+%{_libdir}/%{name}/
 %{_datadir}/applications/seahorse.desktop
-%_datadir/pixmaps/*
+%{_datadir}/seahorse/icons/hicolor/*/*/*
 %dir %{_datadir}/omf/seahorse/
 %dir %{_datadir}/seahorse/
 %{_datadir}/seahorse/ui
 %{_datadir}/omf/seahorse/seahorse-C.omf
-%_datadir/dbus-1/services/*
-%_datadir/icons/hicolor/*/apps/*
-%_datadir/gtk-doc/html/libcryptui/
-%_datadir/gtk-doc/html/libseahorse/
+%{_datadir}/icons/hicolor/*/apps/*
+%{_datadir}/GConf/gsettings/*.convert
+%{_datadir}/glib-2.0/schemas/*.xml
+
