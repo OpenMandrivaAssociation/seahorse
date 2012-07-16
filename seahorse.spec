@@ -9,23 +9,23 @@ Group:		Graphical desktop/GNOME
 URL:		http://seahorse.sourceforge.net/
 Source0:	http://download.gnome.org/sources/%{name}/%{url_ver}/%{name}-%{version}.tar.xz
 
-BuildRequires:	gnome-doc-utils
+BuildRequires:	desktop-file-utils
 BuildRequires:	gnupg
 BuildRequires:	imagemagick
 BuildRequires:	intltool
 BuildRequires:	xsltproc
-BuildRequires:	desktop-file-utils
 BuildRequires:	gpgme-devel >= 1.0.0
 BuildRequires:	libldap-devel
 BuildRequires:	pkgconfig(avahi-client)
-BuildRequires:	pkgconfig(avahi-glib) >= 0.6
-BuildRequires:	pkgconfig(gck-1) >= 3.1.2
-BuildRequires:	pkgconfig(gcr-3) >= 3.1.5
+BuildRequires:	pkgconfig(avahi-glib)
+BuildRequires:	pkgconfig(gck-1)
+BuildRequires:	pkgconfig(gcr-3)
 BuildRequires:	pkgconfig(gio-2.0)
 BuildRequires:	pkgconfig(gmodule-2.0)
-BuildRequires:	pkgconfig(gnome-keyring-1) >= 2.25.5
+BuildRequires:	pkgconfig(gnome-doc-utils)
+BuildRequires:	pkgconfig(gnome-keyring-1)
 BuildRequires:	pkgconfig(gthread-2.0)
-BuildRequires:	pkgconfig(gtk+-3.0) >= 2.90.0
+BuildRequires:	pkgconfig(gtk+-3.0)
 BuildRequires:	pkgconfig(libsoup-2.4)
 
 Requires:	gnupg
