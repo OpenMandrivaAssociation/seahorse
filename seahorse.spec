@@ -8,6 +8,7 @@ License:	GPLv2+
 Group:		Graphical desktop/GNOME
 URL:		http://seahorse.sourceforge.net/
 Source0:	http://download.gnome.org/sources/%{name}/%{url_ver}/%{name}-%{version}.tar.xz
+Patch0:		seahorse-3.4.1_compile.patch
 
 BuildRequires:	desktop-file-utils
 BuildRequires:	gnupg
@@ -42,7 +43,9 @@ for verifying those signatures. Key management options are also included.
 
 %build
 %configure2_5x \
-	--disable-static
+	--disable-static \
+	--disable-scrollkeeper
+
 %make
 
 %install
