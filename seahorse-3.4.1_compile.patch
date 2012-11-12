@@ -1,0 +1,11 @@
+--- seahorse-3.4.1/pgp/seahorse-gpgme-keyring.c~	2012-01-27 13:50:26.000000000 +0000
++++ seahorse-3.4.1/pgp/seahorse-gpgme-keyring.c	2012-07-16 15:48:30.219065680 +0000
+@@ -859,7 +859,7 @@
+ {
+ 	SeahorseGpgmeKeyring *self = SEAHORSE_GPGME_KEYRING (object);
+ 
+-	g_clear_object (self->pv->actions);
++	g_clear_object (&self->pv->actions);
+ 	g_hash_table_destroy (self->pv->keys);
+ 
+ 	/* All monitoring and scheduling should be done */
