@@ -15,7 +15,7 @@ BuildRequires:	imagemagick
 BuildRequires:	intltool itstool
 BuildRequires:	xsltproc
 BuildRequires:	gpgme-devel >= 1.0.0
-BuildRequires:	libldap-devel
+BuildRequires:	openldap-devel
 BuildRequires:	pkgconfig(avahi-client)
 BuildRequires:	pkgconfig(avahi-glib)
 BuildRequires:	pkgconfig(gck-1)
