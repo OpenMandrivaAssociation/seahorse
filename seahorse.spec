@@ -2,7 +2,7 @@
 
 Summary:	GNOME frontend to GnuPG
 Name:		seahorse
-Version:	3.6.3
+Version:	3.8.1
 Release:	1
 License:	GPLv2+
 Group:		Graphical desktop/GNOME
