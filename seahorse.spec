@@ -2,7 +2,7 @@
 
 Summary:	GNOME frontend to GnuPG
 Name:		seahorse
-Version:	3.14.0
+Version:	 3.15.92
 Release:	1
 License:	GPLv2+
 Group:		Graphical desktop/GNOME
@@ -33,8 +33,8 @@ Requires:	gnupg
 %rename		gnome-keyring-manager
 
 %description
-Seahorse is a GNOME frontend for the GNU Privacy Guard ecryption tool. It can 
-be used for file encryption and decryption and for digitally signing files and 
+Seahorse is a GNOME frontend for the GNU Privacy Guard ecryption tool. It can
+be used for file encryption and decryption and for digitally signing files and
 for verifying those signatures. Key management options are also included.
 
 %prep
@@ -57,7 +57,7 @@ desktop-file-install --vendor="" \
 	%{buildroot}%{_datadir}/applications/%{name}.desktop
 
 %find_lang %{name} --all-name --with-gnome
- 
+
 %files -f %{name}.lang
 %doc AUTHORS ChangeLog NEWS README
 %{_bindir}/seahorse

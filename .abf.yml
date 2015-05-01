@@ -1,5 +1,6 @@
 removed_sources:
+  seahorse-3.14.0.tar.xz: e01a179133a9c7f533040d129556646fdf46261d
   seahorse-3.6.3.tar.xz: 6c7f3fd8fd7091476c17773e5caa14b1d8d4582f
   seahorse-3.8.1.tar.xz: 002bfe5073da9e2b6534768b323ba76d5d9083cd
 sources:
-  seahorse-3.14.0.tar.xz: e01a179133a9c7f533040d129556646fdf46261d
+  seahorse-3.15.92.tar.xz: d3169bbdedbda7258e3d90cf426c7d08a80be435
