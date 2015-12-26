@@ -1,13 +1,14 @@
 %define url_ver	%(echo %{version}|cut -d. -f1,2)
+%define _disable_rebuild_configure 1
 
 Summary:	GNOME frontend to GnuPG
 Name:		seahorse
-Version:	 3.15.92
-Release:	3
+Version:	3.18.0
+Release:	1
 License:	GPLv2+
 Group:		Graphical desktop/GNOME
 URL:		http://seahorse.sourceforge.net/
-Source0:	ftp://ftp.gnome.org/pub/GNOME/sources/%{name}/%{url_ver}/%{name}-%{version}.tar.xz
+Source0:	http://download.gnome.org/sources/%{name}/%{url_ver}/%{name}-%{version}.tar.xz
 
 BuildRequires:	desktop-file-utils
 BuildRequires:	gnupg
