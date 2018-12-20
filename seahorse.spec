@@ -62,16 +62,15 @@ desktop-file-install --vendor="" \
 %find_lang %{name} --all-name --with-gnome
 
 %files -f %{name}.lang
-%doc AUTHORS ChangeLog NEWS README
+%doc AUTHORS NEWS README.md
 %{_bindir}/seahorse
-%{_libdir}/%{name}/
 %{_datadir}/applications/seahorse.desktop
-%{_datadir}/GConf/gsettings/*.convert
+#{_datadir}/GConf/gsettings/*.convert
 %{_datadir}/glib-2.0/schemas/*.xml
 %{_datadir}/icons/hicolor/*/apps/*
 %{_datadir}/seahorse
 %{_mandir}/man1/*
-%{_datadir}/appdata/seahorse.appdata.xml
+%{_datadir}/metainfo/%{name}.appdata.xml
 %{_datadir}/dbus-1/services/org.gnome.seahorse.Application.service
 %{_datadir}/gnome-shell/search-providers/seahorse-search-provider.ini
 
