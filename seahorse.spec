@@ -29,6 +29,9 @@ BuildRequires:	pkgconfig(gthread-2.0)
 BuildRequires:	pkgconfig(gtk+-3.0)
 BuildRequires:	pkgconfig(libsoup-2.4)
 BuildRequires:	pkgconfig(libsecret-1)
+BuildRequires:	vala
+BuildRequires:	openssh-clients
+BuildRequires:	meson
 
 Requires:	gnupg
 %rename		gnome-keyring-manager
@@ -43,12 +46,11 @@ for verifying those signatures. Key management options are also included.
 %apply_patches
 
 %build
-%configure
-
-%make
+%meson
+%meson_build
 
 %install
-%makeinstall_std
+%meson_install
 
 # Menu
 desktop-file-install --vendor="" \
