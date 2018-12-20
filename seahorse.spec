@@ -73,5 +73,7 @@ desktop-file-install --vendor="" \
 %{_datadir}/metainfo/%{name}.appdata.xml
 %{_datadir}/dbus-1/services/org.gnome.seahorse.Application.service
 %{_datadir}/gnome-shell/search-providers/seahorse-search-provider.ini
+%{_libexecdir}/seahorse/ssh-askpass
+%{_libexecdir}/seahorse/xloadimage
 
 
