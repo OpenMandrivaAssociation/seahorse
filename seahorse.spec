@@ -65,7 +65,7 @@ for verifying those signatures. Key management options are also included.
 %files -f %{name}.lang
 %doc AUTHORS NEWS README.md
 %{_bindir}/seahorse
-%{_datadir}/org.gnome.seahorse.Application.desktop
+#{_datadir}/org.gnome.seahorse.Application.desktop
 #{_datadir}/GConf/gsettings/*.convert
 %{_datadir}/glib-2.0/schemas/*.xml
 %{_datadir}/icons/hicolor/*/apps/*
