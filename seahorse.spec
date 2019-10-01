@@ -65,13 +65,13 @@ for verifying those signatures. Key management options are also included.
 %files -f %{name}.lang
 %doc AUTHORS NEWS README.md
 %{_bindir}/seahorse
-%{_datadir}/applications/seahorse.desktop
+%{_datadir}/org.gnome.seahorse.Application.desktop
 #{_datadir}/GConf/gsettings/*.convert
 %{_datadir}/glib-2.0/schemas/*.xml
 %{_datadir}/icons/hicolor/*/apps/*
 %{_datadir}/seahorse
-%{_mandir}/man1/*
-%{_datadir}/metainfo/%{name}.appdata.xml
+3{_mandir}/man1/*
+%{_datadir}/metainfo/org.gnome.seahorse.Application.appdata.xml
 %{_datadir}/dbus-1/services/org.gnome.seahorse.Application.service
 %{_datadir}/gnome-shell/search-providers/seahorse-search-provider.ini
 %{_libexecdir}/seahorse/ssh-askpass
