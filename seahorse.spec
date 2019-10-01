@@ -29,6 +29,7 @@ BuildRequires:	pkgconfig(gthread-2.0)
 BuildRequires:	pkgconfig(gtk+-3.0)
 BuildRequires:	pkgconfig(libsoup-2.4)
 BuildRequires:	pkgconfig(libsecret-1)
+BuildRequires:	pkgconfig(pwquality)
 BuildRequires:	vala
 BuildRequires:	openssh-clients
 BuildRequires:	meson
