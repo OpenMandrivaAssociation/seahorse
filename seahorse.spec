@@ -54,11 +54,11 @@ for verifying those signatures. Key management options are also included.
 %meson_install
 
 # Menu
-desktop-file-install --vendor="" \
-	--remove-category="Advanced" \
-	--remove-category="Application" \
-	--dir %{buildroot}%{_datadir}/applications \
-	%{buildroot}%{_datadir}/applications/%{name}.desktop
+#desktop-file-install --vendor="" \
+#	--remove-category="Advanced" \
+#	--remove-category="Application" \
+#	--dir %{buildroot}%{_datadir}/applications \
+#	%{buildroot}%{_datadir}/applications/%{name}.desktop
 
 %find_lang %{name} --all-name --with-gnome
 
