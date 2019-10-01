@@ -70,7 +70,7 @@ for verifying those signatures. Key management options are also included.
 %{_datadir}/glib-2.0/schemas/*.xml
 %{_datadir}/icons/hicolor/*/apps/*
 %{_datadir}/seahorse
-3{_mandir}/man1/*
+#{_mandir}/man1/*
 %{_datadir}/metainfo/org.gnome.seahorse.Application.appdata.xml
 %{_datadir}/dbus-1/services/org.gnome.seahorse.Application.service
 %{_datadir}/gnome-shell/search-providers/seahorse-search-provider.ini
