@@ -3,7 +3,7 @@
 
 Summary:	GNOME frontend to GnuPG
 Name:		seahorse
-Version:	3.34
+Version:	3.34.1
 Release:	1
 License:	GPLv2+
 Group:		Graphical desktop/GNOME
@@ -44,7 +44,7 @@ for verifying those signatures. Key management options are also included.
 
 %prep
 %setup -q
-%apply_patches
+%autopatch -p1
 
 %build
 %meson
