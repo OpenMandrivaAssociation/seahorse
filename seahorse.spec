@@ -30,9 +30,11 @@ BuildRequires:	pkgconfig(gtk+-3.0)
 BuildRequires:	pkgconfig(libsoup-2.4)
 BuildRequires:	pkgconfig(libsecret-1)
 BuildRequires:	pkgconfig(pwquality)
+BuildRequires:  pkgconfig(gobject-introspection-1.0)
 BuildRequires:	vala
 BuildRequires:	openssh-clients
 BuildRequires:	meson
+BuildRequires:  gobject-introspection
 
 Requires:	gnupg
 %rename		gnome-keyring-manager
