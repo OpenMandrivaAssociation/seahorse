@@ -17,6 +17,7 @@ BuildRequires:	intltool itstool
 BuildRequires:	xsltproc
 BuildRequires:	gpgme-devel >= 1.0.0
 BuildRequires:	openldap-devel
+BuildRequires:  pkgconfig(appstream-glib)
 BuildRequires:	pkgconfig(avahi-client)
 BuildRequires:	pkgconfig(avahi-glib)
 BuildRequires:	pkgconfig(gck-1)
