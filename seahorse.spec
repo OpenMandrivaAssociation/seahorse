@@ -8,7 +8,7 @@ Release:	0.beta.0
 License:	GPLv2+
 Group:		Graphical desktop/GNOME
 URL:		http://seahorse.sourceforge.net/
-Source0:	http://download.gnome.org/sources/%{name}/%{url_ver}/%{name}-%{version}-beta.tar.xz
+Source0:	http://download.gnome.org/sources/%{name}/%{url_ver}/%{name}-%{version}.beta.tar.xz
 
 BuildRequires:	desktop-file-utils
 BuildRequires:	gnupg
@@ -47,7 +47,7 @@ be used for file encryption and decryption and for digitally signing files and
 for verifying those signatures. Key management options are also included.
 
 %prep
-%setup -q -n %{name}-%{version}-beta
+%setup -q -n %{name}-%{version}.beta
 %autopatch -p1
 
 %build
