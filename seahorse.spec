@@ -3,12 +3,12 @@
 
 Summary:	GNOME frontend to GnuPG
 Name:		seahorse
-Version:	41
-Release:	0.beta.0
+Version:	41.0
+Release:	1
 License:	GPLv2+
 Group:		Graphical desktop/GNOME
 URL:		http://seahorse.sourceforge.net/
-Source0:	http://download.gnome.org/sources/%{name}/%{url_ver}/%{name}-%{version}.beta.tar.xz
+Source0:	http://download.gnome.org/sources/%{name}/%{url_ver}/%{name}-%{version}.tar.xz
 
 BuildRequires:	desktop-file-utils
 BuildRequires:	gnupg
@@ -47,7 +47,7 @@ be used for file encryption and decryption and for digitally signing files and
 for verifying those signatures. Key management options are also included.
 
 %prep
-%setup -q -n %{name}-%{version}.beta
+%setup -q -n %{name}-%{version}
 %autopatch -p1
 
 %build
