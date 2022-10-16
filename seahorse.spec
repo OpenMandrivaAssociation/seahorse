@@ -69,7 +69,7 @@ export CXX=g++
 %find_lang %{name} --all-name --with-gnome
 
 %files -f %{name}.lang
-%doc AUTHORS NEWS README.md
+%doc NEWS README.md
 %{_bindir}/seahorse
 %{_datadir}/applications/org.gnome.seahorse.Application.desktop
 #{_datadir}/GConf/gsettings/*.convert
