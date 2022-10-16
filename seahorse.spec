@@ -3,8 +3,8 @@
 
 Summary:	GNOME frontend to GnuPG
 Name:		seahorse
-Version:	42.0
-Release:	2
+Version:	43.0
+Release:	1
 License:	GPLv2+
 Group:		Graphical desktop/GNOME
 URL:		http://seahorse.sourceforge.net/
