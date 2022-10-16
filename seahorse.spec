@@ -51,6 +51,8 @@ for verifying those signatures. Key management options are also included.
 %autopatch -p1
 
 %build
+export CC=gcc
+export CXX=g++
 %meson
 %meson_build
 
