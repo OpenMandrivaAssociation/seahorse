@@ -9,6 +9,9 @@ License:	GPLv2+
 Group:		Graphical desktop/GNOME
 URL:		https://seahorse.sourceforge.net/
 Source0:	https://download.gnome.org/sources/%{name}/%{url_ver}/%{name}-%{version}.tar.xz
+# Fedora
+# https://gitlab.gnome.org/GNOME/seahorse/-/merge_requests/248
+Patch0:  https://src.fedoraproject.org/rpms/seahorse/blob/rawhide/f/seahorse-47.0.1-allow-build-with-gpgme2.patch
 
 BuildRequires:	desktop-file-utils
 BuildRequires:	gnupg
